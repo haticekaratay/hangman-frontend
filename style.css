@@ -1,6 +1,10 @@
 body{
     background: rgb(255, 196, 196);
 }
+
+.container {
+    margin-top: 50px;
+}
 .noose{
     top: 10px;
     left: 30px;
@@ -9,25 +13,51 @@ body{
 }
   
 .face{
-    width: 28%;
+    width: 36%;
     position: absolute ;
-    top: 110px;
-    left: 60;
-    z-index: 2;
+    top: 15%;
+    right: 25%;
+    z-index: 3;
 }
 
 .shirt{
     position: absolute ;
-    width: 30%;
-    top: 170px;
-    left: 80;
-    z-index: 3; 
+    width: 50%;
+    top: 26.8%;
+    right: 16.7%;
+    z-index: 2; 
+}
+.arms{
+    position: absolute ;
+    width: 50%;
+    top: 26.5%;
+    right: 18.2%;
+    z-index: 1; 
 }
 
 .short{
-    width: 26%;
+    width: 48%;
     position: absolute ;
-    top: 230px;
-    left: 80;
-    z-index: 2;
+    top: 45%;
+    right: 19%;
+    z-index: 5;
+}
+
+.legs{
+    width: 40%;
+    position: absolute ;
+    top: 60%;
+    right: 21%;
+    z-index: 4;
+}
+.btn {
+    width:20%;
+    margin-bottom: 2%;
+}
+
+.word-container{
+    border-bottom: 5px solid orange;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
