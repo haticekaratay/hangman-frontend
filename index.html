@@ -3,52 +3,84 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <title>Hangman</title>
     </head>
     <body>
         <div class="container">
+
             <div class="row">
-                <div class="col-md-6">
-                    <div class="row">words</div>
-                    <div class="row">
-                        <button class="btn btn-success" id="button">A</button>
-                        <button class="btn btn-success" id="button">B</button>
-                        <button class="btn btn-success" id="button">C</button>
-                        <button class="btn btn-success" id="button">D</button>
-                        <button class="btn btn-success" id="button">E</button>
-                        <button class="btn btn-success" id="button">F</button>
-                        <button class="btn btn-success" id="button">G</button>
-                        <button class="btn btn-success" id="button">H</button>
-                        <button class="btn btn-success" id="button">I</button>
-                        <button class="btn btn-success" id="button">J</button>
-                        <button class="btn btn-success" id="button">K</button>
-                        <button class="btn btn-success" id="button">L</button>
-                        <button class="btn btn-success" id="button">M</button>
-                        <p></p>
-                        <button class="btn btn-success" id="button">N</button>
-                        <button class="btn btn-success" id="button">O</button>
-                        <button class="btn btn-success" id="button">P</button>
-                        <button class="btn btn-success" id="button">Q</button>
-                        <button class="btn btn-success" id="button">R</button>
-                        <button class="btn btn-success" id="button">S</button>
-                        <button class="btn btn-success" id="button">T</button>
-                        <button class="btn btn-success" id="button">U</button>
-                        <button class="btn btn-success" id="button">V</button>
-                        <button class="btn btn-success" id="button">W</button>
-                        <button class="btn btn-success" id="button">X</button>
-                        <button class="btn btn-success" id="button">Y</button>
-                        <button class="btn btn-success" id="button">Z</button>
-                    </div>
-                </div>
 
                 <div class="col-md-6">
                     <img class="noose" src="image/noose.png" alt="Noose">
                     <img class="face" src="image/face.png" alt="Face">
-                    <img class="shirt" src="image/shirt.png" alt="Face">
-                    <img class="short" src="image/short.png" alt="Face">
+                    <img class="shirt" src="image/shirt.png" alt="Shirt">
+                    <img class="arms" src="image/arms.png" alt="Arms">
+                    <img class="short" src="image/short.png" alt="Short">
+                    <img class="legs" src="image/legs.png" alt="Legs">
                 </div>
                 
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">N</div>
+                        <div class="word-container mr-3">K</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">R</div>
+                        <div class="word-container mr-3">A</div>
+
+                        <div class="word-container mr-3">&nbsp</div>
+                        <div class="word-container mr-3">N</div>
+                        <div class="word-container mr-3">K</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">R</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">N</div>
+                        <div class="word-container mr-3">K</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">R</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">N</div>
+                        <div class="word-container mr-3">K</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">R</div>
+                        <div class="word-container mr-3">A</div>
+                        <div class="word-container mr-3">A</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="A">A</button>          
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="B">B</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="C">C</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="D">D</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="E">E</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="F">F</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="G">G</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="H">H</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="I">I</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="J">J</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="K">K</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="L">L</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="M">M</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="N">N</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="O">O</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="P">P</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="Q">Q</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="R">R</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="S">S</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="T">T</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="U">U</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="V">V</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="W">W</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="X">X</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="Y">Y</button>
+                        <button class="btn btn-success mr-3 btn-lg" id="button" value="Z">Z</button>
+                    </div>
+                </div>
+                 
             </div>
+
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
