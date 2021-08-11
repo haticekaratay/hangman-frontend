@@ -6,8 +6,9 @@ body{
     margin-top: 50px;
 }
 .noose{
-    top: 10px;
-    left: 30px;
+    width: 55%;
+    top: 4%;
+    left: 5%;
     position: absolute;
     z-index: 1;
 }
@@ -59,5 +60,13 @@ body{
     border-bottom: 5px solid orange;
     font-size: xx-large;
     font-weight: bold;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-content: center;
+}
+
+.title{
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: cursive;
+    text-align: center;
 }
