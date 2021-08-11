@@ -14,6 +14,15 @@ class WordAPI{
         })  
     }
 
+    getWord(id=4){
+        //console.log("in get word")
+        fetch(`${this.baseURL}/${id}`)
+        .then(response => response.json())
+        .then(wordObject => {
+           new Word(wordObject).renderWord()
+        })
+    }
+
 }
 
 
