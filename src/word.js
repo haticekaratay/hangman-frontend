@@ -1,27 +1,32 @@
 class Word{
-    constructor(str){
-        this.str = str
+    static all = []
+    constructor({name,id,category}){
+        this.name = name
+        this.id = id
+        this.category = category
+        Word.all.push(this)
     }
-
+  
     renderWord(){
         let wordContainer = document.querySelector("#word-container");
+        let categoryContainer = document.createElement("div")
+        categoryContainer.innerText = this.category
+        wordContainer.appendChild(categoryContainer)
 
-        for(let i=0; i<this.str.length; i++){
-            console.log(this.str.length)
+        for(let i=0; i<this.name.length; i++){
+            console.log(this.name.length)
             let letterContainer = document.createElement("div");
-            if(this.str[i]===""){
+            if(this.name[i]===""){
                 letterContainer.innerText ="&nbsp"
             }
             else{
-                letterContainer.classList.add("letter-container");
-                letterContainer.classList.add("mr-3")
-                letterContainer.innerText =this.str[i].toUpperCase()
+                letterContainer.classList.add("letter-container","mr-3");
+                letterContainer.innerText =this.name[i].toUpperCase()
             }
             wordContainer.appendChild(letterContainer)
         }
         return wordContainer
     }
+
 }
-// console.log(renderWord("Helloo  Hatice"))
-let word = new Word("Hello Hatice")
-console.log(word.renderWord())
+
