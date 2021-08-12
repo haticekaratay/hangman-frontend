@@ -11,6 +11,7 @@ class WordAPI{
             len = words.length;
             rndIndex = Utils.getRandomIndex(len);
             new Word(words[rndIndex]).renderWord()
+            new Word(words[rndIndex]).letterClick()
         });
     }
 

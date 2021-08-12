@@ -1,12 +1,12 @@
 class Word{
     static all = []
-    constructor({name,id,category}){
-        this.name = name
-        this.id = id
-        this.category = category
-        Word.all.push(this)
+    constructor(wordObject){
+        this.name = wordObject.name
+        this.id = wordObject.id
+        this.category = wordObject.category
+     
     }
-
+   
     renderWord(){
         let wordContainer = document.querySelector("#word-container");
 
@@ -31,20 +31,35 @@ class Word{
             wordContainer.appendChild(letterContainer)
         }
         wordContainer.classList.add("d-flex", "justify-content-center")
+        
         return this.name
     }
 
     letterClick(){
         let letterButtons = document.querySelectorAll("#button")
         letterButtons.forEach(button => {
-            button.addEventListener("click", (e)=>
-                    e.target.disabled = true)})
+            button.addEventListener("click", (e)=>{
+                    e.target.disabled = true
+                    console.log(this.name)
+             } )})
                 
     }
 
+    isMatched(letter){
+        let letterButtons = document.querySelectorAll("#button")
+        letterButtons.forEach(button=> {
+           if(button.value === letter){
+               return true
+           }
+        })
+        return false
+    }
+
+
+
 }
 
-        
+    
 
 
 
