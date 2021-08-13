@@ -52,7 +52,14 @@ class Word{
         console.log("repeating letters", repeatingLetterIndex)
         return repeatingLetterIndex;
     }
-            
+    
+    displayLetter(indexArray,letter){
+        let l= document.querySelectorAll(".letter-container")
+        let a= Array.from(l);
+        for(let i=0; i<indexArray.length; i++){
+            a[indexArray[i]].innerText = letter
+        }
+    }        
     
     letterClick(){
         let letterButtons = document.querySelectorAll("#button")
