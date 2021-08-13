@@ -1,3 +1,13 @@
+let bodyParts = [
+    "image/noose.png",
+    "image/face.png",
+    "image/shirt.png",
+    "image/arms.png",
+    "image/short.png",
+    "image/legs.png",
+]
+
+let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
 class Word{
     static all = []
     constructor(wordObject){
@@ -67,11 +77,30 @@ class Word{
                     e.target.disabled = true
                     let value = e.target.value
                     const indexArray = this.findIndex(this.name,value)
+                    if(indexArray.length == 0){
+                        console.log("display body")
+                        this.displayBody()
+                    }
                     console.log(indexArray)
                     this.displayLetter(indexArray,value)
 
             })})     
     }
+
+
+    displayBody(){
+       
+        
+        let body = document.querySelector("#body-parts")
+        let img = document.createElement("img")
+        const image = bodyParts.shift()
+        let css = cssBodyParts.shift()
+        console.log(image)
+        img.className = css
+        img.src = image
+        body.append(img)
+    }
+
 
     isMatched(letter, value){
         
