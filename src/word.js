@@ -52,10 +52,9 @@ class Word{
         console.log("repeating letters", repeatingLetterIndex)
         return repeatingLetterIndex;
     }
-    
+
     displayLetter(indexArray,letter){
-        let l= document.querySelectorAll(".letter-container")
-        let a= Array.from(l);
+        let a= document.querySelectorAll("#word-container")[0].children
         for(let i=0; i<indexArray.length; i++){
             a[indexArray[i]].innerText = letter
         }
