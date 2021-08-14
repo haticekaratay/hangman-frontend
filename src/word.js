@@ -8,6 +8,8 @@ let bodyParts = [
 ]
 
 let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
+
+let correctNumbers = 0;
 class Word{
     static all = []
     constructor(wordObject){
@@ -72,34 +74,55 @@ class Word{
     
     letterClick(){
         let letterButtons = document.querySelectorAll("#button")
+        
         letterButtons.forEach(button => {
             button.addEventListener("click", (e)=>{
                     e.target.disabled = true
                     let value = e.target.value
                     const indexArray = this.findIndex(this.name,value)
-                    if(indexArray.length == 0){
-                        console.log("display body")
-                        this.displayBody()
-                    }
-                    console.log(indexArray)
-                    this.displayLetter(indexArray,value)
+                    
 
+                    if(indexArray.length == 0){
+                        this.displayBody()      
+                    }
+                    if(bodyParts.length==0){
+                        console.log("You lost")
+                       
+                    }
+                    this.displayLetter(indexArray,value)
+                    correctNumbers = correctNumbers + indexArray.length
+                    const len = this.name.split(" ").join("").length
+                    
+                    console.log("score", correctNumbers)
+                    console.log("len /w", this.name.length)
+                    console.log("len /wo", len)
+                    
+                   
+                   if(correctNumbers == len){
+                       console.log("You win")
+                   }
+                   
             })})     
     }
 
 
     displayBody(){
-       
-        
         let body = document.querySelector("#body-parts")
         let img = document.createElement("img")
         const image = bodyParts.shift()
-        let css = cssBodyParts.shift()
-        console.log(image)
-        img.className = css
-        img.src = image
-        body.append(img)
+        // if(image == undefined){
+        //     return false
+        // }else{
+            let css = cssBodyParts.shift()
+            console.log(image)
+            img.className = css
+            img.src = image
+            body.append(img)
+        
+        
     }
+
+
 
 
     isMatched(letter, value){
