@@ -73,36 +73,40 @@ class Word{
     }        
     
     letterClick(){
-        let letterButtons = document.querySelectorAll("#button")
-        
+        let letterButtons = document.querySelectorAll("#button");
+        const len = this.name.split(" ").join("").length;
+
         letterButtons.forEach(button => {
             button.addEventListener("click", (e)=>{
                     e.target.disabled = true
                     let value = e.target.value
-                    const indexArray = this.findIndex(this.name,value)
+                    const indexArray = this.findIndex(this.name,value);
                     
-
+                    this.displayLetter(indexArray,value)
+                    correctNumbers = correctNumbers + indexArray.length
+                    
                     if(indexArray.length == 0){
                         this.displayBody()      
                     }
+
                     if(bodyParts.length==0){
-                        console.log("You lost")
-                       
-                    }
-                    this.displayLetter(indexArray,value)
-                    correctNumbers = correctNumbers + indexArray.length
-                    const len = this.name.split(" ").join("").length
-                    
-                    console.log("score", correctNumbers)
-                    console.log("len /w", this.name.length)
-                    console.log("len /wo", len)
-                    
-                   
-                   if(correctNumbers == len){
+                        console.log("You lost");
+                        this.disableAllButtons(); 
+                        this.displayModal()
+                    } else if(correctNumbers == len){
                        console.log("You win")
+                       this.disableAllButtons();
+                       this.displayModal()
                    }
                    
-            })})     
+            })}); 
+    }
+
+    disableAllButtons() {
+        let letterButtons = document.querySelectorAll("#button");
+        letterButtons.forEach(button => {
+            button.disabled = true;
+        });
     }
 
 
@@ -122,7 +126,11 @@ class Word{
         
     }
 
-
+    displayModal(){
+        
+        $("#gameEnd").modal("show");
+       
+    }
 
 
     isMatched(letter, value){
