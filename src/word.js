@@ -92,7 +92,7 @@ class Word{
                     if(bodyParts.length==0){
                         console.log("You lost");
                         this.disableAllButtons(); 
-                        this.displayModal("Game Over")
+                        this.displayModal("Game Over",this.name)
                     } else if(correctNumbers == len){
                        console.log("You win")
                        this.disableAllButtons();
@@ -124,14 +124,24 @@ class Word{
         
     }
 
-    displayModal(status){
+    displayModal(status,categoryName){
         let modalTitle = document.querySelector("#modalTitle")
+        let modalBody = document.querySelector("#modalBody")
         modalTitle.innerText = status.toUpperCase()
-      
-        $("#gameEnd").modal("show");
-       
-    }
+        let input = document.createElement("input")
+        
+        if(categoryName){
+            modalBody.innerHTML = `The correct answer is <b>${this.name}</b> <br> Do you wish to enter your name to save your score:`
 
+        }else{
+            modalBody.innerText = "Do you wish to enter your name to save your score: "
+        }
+        input.type = "text"
+        input.placeholder ="Your Name"
+        modalBody.append(input)
+     
+        $("#gameEnd").modal("show");
+    }
 
     isMatched(letter, value){
         
