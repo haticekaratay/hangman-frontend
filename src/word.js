@@ -92,11 +92,11 @@ class Word{
                     if(bodyParts.length==0){
                         console.log("You lost");
                         this.disableAllButtons(); 
-                        this.displayModal()
+                        this.displayModal("Game Over")
                     } else if(correctNumbers == len){
                        console.log("You win")
                        this.disableAllButtons();
-                       this.displayModal()
+                       this.displayModal("You Win!")
                    }
                    
             })}); 
@@ -114,20 +114,20 @@ class Word{
         let body = document.querySelector("#body-parts")
         let img = document.createElement("img")
         const image = bodyParts.shift()
-        // if(image == undefined){
-        //     return false
-        // }else{
-            let css = cssBodyParts.shift()
-            console.log(image)
-            img.className = css
-            img.src = image
-            body.append(img)
+        let css = cssBodyParts.shift()
+
+        
+        img.className = css
+        img.src = image
+        body.append(img)
         
         
     }
 
-    displayModal(){
-        
+    displayModal(status){
+        let modalTitle = document.querySelector("#modalTitle")
+        modalTitle.innerText = status.toUpperCase()
+      
         $("#gameEnd").modal("show");
        
     }
