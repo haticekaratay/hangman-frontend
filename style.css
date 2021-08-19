@@ -57,11 +57,23 @@ body{
 }
 
 .letter-container{
-    border-bottom: 5px solid orange;
-    font-size: xx-large;
+    height: 20%;
+    width: 3%;
+    border-bottom: 5px solid rgb(8, 6, 0); 
+    /* font-size: xx-large; */
+    /* font-size: 2vw; */
+    /* font-size: calc(4vw + 4vh); */
     font-weight: bold;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    align-content: center;
+    /* align-content: center; */
+    text-align: center;
+    
+    /* white-space: nowrap; */
+    
+}
+.empty-space{
+    height: 20%;
+    width: 2%;
 }
 
 .title{
@@ -69,4 +81,8 @@ body{
     font-weight: bold;
     font-family: cursive;
     text-align: center;
+}
+.error{
+    font-weight: bold;
+    color: red;
 }

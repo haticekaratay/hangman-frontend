@@ -30,7 +30,11 @@ class Game{
          
         })
     }
-
+    static errorMessage(message){
+        let modalBodyText = document.querySelector("#error")
+        modalBodyText.innerText = message
+        modalBodyText.className = "error"
+    }
   
 
 }
