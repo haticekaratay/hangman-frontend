@@ -35,6 +35,6 @@ class Game{
         modalBodyText.innerText = message
         modalBodyText.className = "error"
     }
-  
 
+ 
 }

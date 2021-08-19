@@ -15,15 +15,19 @@ class PlayerAPI{
 
         fetch(this.baseURL,configObject)
         .then(response => response.json())
-        .then(playerObject => {
+        .then(currentplayer => {
            
-            if(playerObject.message){
-                Game.errorMessage(playerObject.message[0])
+            if(currentplayer.message){
+                Game.errorMessage(currentplayer.message[0])
             }else{
-                console.log("close modal")
+                $("#gameEnd").modal("hide")
+                Player.displayName(currentplayer)
+                Player.displayScore("0","100")
             }
             })
         .catch(error => console.log(error))
     }
 }
+
+
 
