@@ -9,51 +9,56 @@ let bodyParts = [
 
 let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
 
+let score = 0
 let correctNumbers = 0;
 class Word{
     static all = []
+
     constructor(wordObject){
         this.name = wordObject.name
         this.id = wordObject.id
         this.category = wordObject.category
-        this.space = this.renderSpace()
-        
+        Word.all.push(this)
+        //this.space = this.renderSpace()
+
+        console.log(JSON.stringify(wordObject,null,2))
+        console.log(Word.all)
+        // debugger
+        this.renderSpace()
+        this.letterClick()
     }
    
     renderSpace(){
         let wordContainer = document.querySelector("#word-container");
-
+        let word = Word.all[Word.all.length-1].name
         let categoryContainer = document.querySelector("#category-container")
         
         categoryContainer.innerText = this.category.toUpperCase()
         categoryContainer.className = "title"
         
 
-        for(let i=0; i<this.name.length; i++){
+        for(let i=0; i<word.length; i++){
             
             let letterContainer = document.createElement("div");
            
             wordContainer.classList.add("d-flex", "justify-content-center");
-                //letterContainer.innerText ="&nbsp"
-                if(this.name[i]===" "){
-                    // letterContainer.classList.add("letter-container","mr-3")
-                    //letterContainer.innerText =this.name[i]
+                if(word[i]===" "){
                     letterContainer.className = "empty-space"
                 }else{
                     letterContainer.classList.add("letter-container","mr-3")
-                    //letterContainer.innerText =this.name[i].toUpperCase()
                     letterContainer.innerText =" "
                 }
-                //letterContainer.style.display = "block"
-                console.log(this.name)
+                console.log(word)
                 wordContainer.appendChild(letterContainer)
         }
+            //this.letterClick()
+            // debugger
+            //return word
             
-            return this.name
         }
 
     findIndex(word,letter){
-
+        console.log("word in find index", word)
         let repeatingLetterIndex =[]
         
         word.toLowerCase().split("").filter((l,index)=>{
@@ -61,30 +66,49 @@ class Word{
                repeatingLetterIndex.push(index)
             }
         })
-        console.log("repeating letters", repeatingLetterIndex)
+    
         return repeatingLetterIndex;
+        
     }
 
     displayLetter(indexArray,letter){
+        // debugger
         let a= document.querySelectorAll("#word-container")[0].children
+        console.log("in display letter",indexArray,letter)
         for(let i=0; i<indexArray.length; i++){
             a[indexArray[i]].innerText = letter
         }
+        // debugger
     }        
     
     letterClick(){
+        let word;
+        if(word){
+            word = Word.all[Word.all.length-1].name
+        }else{
+            word = Word.all[Word.all.length-1].name
+        }
+       
         let letterButtons = document.querySelectorAll("#button");
-        const len = this.name.split(" ").join("").length;
+        const len = word.split(" ").join("").length;
 
         letterButtons.forEach(button => {
             button.addEventListener("click", (e)=>{
                     e.target.disabled = true
+                    Player.displayScore(Word.calculateScore(),"100")
                     let value = e.target.value
-                    const indexArray = this.findIndex(this.name,value);
+                    const indexArray = this.findIndex(word,value);
                     
+                    console.log("in letter click - indexArray", indexArray)
                     this.displayLetter(indexArray,value)
                     correctNumbers = correctNumbers + indexArray.length
                     
+                    if(indexArray.length>0){
+                        score = correctNumbers * 10
+                    }
+
+                    console.log(score)
+                    Player.displayScore(score,"200")
                     if(indexArray.length == 0){
                         this.displayBody()      
                     }
@@ -92,14 +116,21 @@ class Word{
                     if(bodyParts.length==0){
                         console.log("You lost");
                         this.disableAllButtons(); 
-                        this.displayModal("Game Over",this.name)
+                        this.displayModal("Game Over",word)
+
                     } else if(correctNumbers == len){
                        console.log("You win")
                        this.disableAllButtons();
+                       score += bodyParts.length*10 
+                       console.log("before modal score", score)
+                       Player.displayScore(score,"100")
                        this.displayModal("You Win!")
                    }
+
                    
             })}); 
+            
+
     }
 
     disableAllButtons() {
@@ -121,39 +152,61 @@ class Word{
         img.src = image
         body.append(img)
         
-        
     }
 
-    displayModal(status,categoryName){
-        let modalTitle = document.querySelector("#modalTitle")
-        let modalBody = document.querySelector("#modalBody")
+    displayModal(status,answer){
+        let modalTitle = document.querySelector("#endTitle")
+        let modalBody = document.querySelector("#endBody")
         modalTitle.innerText = status.toUpperCase()
-        let input = document.createElement("input")
         
-        if(categoryName){
-            modalBody.innerHTML = `The correct answer is <b>${this.name}</b> <br> Do you wish to enter your name to save your score:`
+        if(answer){
+            modalBody.innerHTML = `The correct answer is <b>${this.name}<b>`
 
         }else{
-            modalBody.innerText = "Do you wish to enter your name to save your score: "
+            modalBody.innerText = "Congratulations: "
         }
-        input.type = "text"
-        input.placeholder ="Your Name"
-        modalBody.append(input)
-     
-        $("#gameEnd").modal("show");
-    }
-
-    isMatched(letter, value){
         
-        if(value === letter){
-               return true
-           }
-        return false
+        $("#gameEnd").modal("show");
+        Game.sendGameData()
+        //this.reset()
+        
     }
 
+    // reset(){
+    //     Word.all.shift()
+        
+    //     Game.clearWordContainer()
+    //     Game.createWordContainer()
+    //     this.name = new WordAPI("http://localhost:3000/words").getWord()
+    //     //this.renderSpace()
+    //     bodyParts = [
+    //         "image/noose.png",
+    //         "image/face.png",
+    //         "image/shirt.png",
+    //         "image/arms.png",
+    //         "image/short.png",
+    //         "image/legs.png",
+    //     ]
+    //     cssBodyParts = ["noose","face","shirt","arms","short","legs"]
+    //    // this.letterClick()
+    //     this.enableAllButtons()
+        
+    // }
 
+    // enableAllButtons() {
+    //     let letterButtons = document.querySelectorAll("#button");
+    //     letterButtons.forEach(button => {
+    //         button.disabled = false;
+    //     });
+        
+    // }
 
+    static calculateScore(){
+        console.log("calculateScore value", score)
+        return score 
+    }
 }
+
 
     
 
