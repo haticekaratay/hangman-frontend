@@ -1,19 +1,27 @@
 class WordAPI{
-    static baseURL = "http://localhost:3000/words"
+    //baseURL = "http://localhost:3000/words"
 
-    static getWord() {
+    constructor (baseURL) {
+        this.baseURL = baseURL
+    }
+
+     getWord() {
         let len = 0
         let rndIndex = 1;
 
-        fetch(this.baseURL)
+        fetch(`
+        ${this.baseURL}/${Utils.getRandomIndex(20)}`)
         .then(response => response.json()) 
-        .then(words => {
-            len = words.length;
-            rndIndex = Utils.getRandomIndex(len);
-            new Word(words[rndIndex]).renderWord()
-            new Word(words[rndIndex]).letterClick()
+        .then(word => {
+            //len = words.length;
+            //rndIndex = Utils.getRandomIndex(20);
+            //new Word(words[rndIndex])//.renderSpace()
+            new Word(word)
+            //return words[rndIndex]
         });
+    
     }
+    
 
 }
 

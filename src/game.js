@@ -1,13 +1,16 @@
 class Game{
     static all =[]
-    constructor({id, player_id}){
+    //static players = [];
+    constructor({id,player_id}){
         this.id = id
         this.player_id = player_id
         Game.all.push(this)
+        //Game.players.push(player_id)
         
     }
-
+  
     static displayWelcome(){
+
         let modalTitle = document.querySelector("#modalTitle")
         let modalBody = document.querySelector("#modalBodyText")
         let savePlayerButton = document.querySelector("#savePlayer")
@@ -31,6 +34,7 @@ class Game{
          
         })
         
+        
     }
     static errorMessage(message){
         let modalBodyText = document.querySelector("#error")
@@ -38,28 +42,67 @@ class Game{
         modalBodyText.className = "error"
     }
 
-    // static computeScore(){
-        
-    //     return 90
-        
+    // static displayExistingModal() {
+
+    //     $("#existingUserModal").modal("show");
     // }
+
+
 
     static sendGameData() {
         let playAgain = document.querySelector("#playAgain")
+        let close = document.querySelector("#close")
+
         playAgain.addEventListener("click", (e)=>{
             let gameData = {
                 player_id: Game.all[Game.all.length-1].player_id,
-                score: Word.calculateScore()
+                score: Word.calculateScore(),
+                isFinished: false
             }
+            //console.log("before post gamedata", gameData)
             GameAPI.createGame(gameData)
             
             $("#gameEnd").modal("hide")
         })
+
+        // close.addEventListener("click",(e)=>{
+        //     let gameData = {
+        //         player_id: Game.all[Game.all.length-1].player_id,
+        //         score: Word.calculateScore()
+
+        //     }
+        //     GameAPI.createGame(gameData)
+            
+        //     $("#gameEnd").modal("hide")
+        // })
         
     }
    
 
-    // enableAllButtons() {
+   
+    // static clearWordContainer(){
+    //     let wordContainer = document.querySelector("#word-container").children;
+    //     Array.from(wordContainer).forEach(letterContainer => {
+    //         letterContainer.innerText=""
+    //         letterContainer.remove()
+    //     })
+    //     // wordContainer.remove()
+        
+    // }
+
+    // static createWordContainer(){
+        
+
+    //     let container = document.querySelector(".container").parentNode
+    //     let wordContainer = document.createElement("div")
+    //     wordContainer.className ="row"
+    //     wordContainer.id = "word-container"
+        
+    //     container.insertBefore(wordContainer,container.children[1])
+        
+    // }
+
+     // enableAllButtons() {
     //     let letterButtons = document.querySelectorAll("#button");
     //     letterButtons.forEach(button => {
     //         button.disabled = false;
@@ -78,23 +121,14 @@ class Game{
          
     // }
 
-    // static clearWordContainer(){
-    //     let wordContainer = document.querySelector("#word-container");
-    //     wordContainer.remove()
+    static clearWordContainer(){
+        let wordContainer = document.querySelector("#word-container");
+        Array.from(wordContainer.children).forEach(letterContainer=>{
+            letterContainer.innerText =""
+            letterContainer.remove()
+        })
         
-    // }
-
-    // static createWordContainer(){
-        
-
-    //     let container = document.querySelector(".container").parentNode
-    //     let wordContainer = document.createElement("div")
-    //     wordContainer.className ="row"
-    //     wordContainer.id = "word-container"
-        
-    //     container.insertBefore(wordContainer,container.children[1])
-        
-    // }
+    }
 //     restart(){
         
 //         //get another word

@@ -14,10 +14,12 @@ class GameAPI{
         fetch(this.baseURL,configObject)
         .then(response => response.json())
         .then(currentGame=> {
-            console.log("Current Game in game fetch", currentGame)
-            new Game(currentGame.id, currentGame.player_id, currentGame.score)
-            
+            console.log("current game",currentGame) 
+            new Game(currentGame)
+            //location.reload();           
         })
         .catch(error=>console.log(error))
+        
     }
 }
+

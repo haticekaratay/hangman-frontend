@@ -11,8 +11,11 @@ let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
 
 let score = 0
 let correctNumbers = 0;
+let currentWord = {}
 class Word{
     static all = []
+
+    static currentWord = {}
 
     constructor(wordObject){
         this.name = wordObject.name
@@ -21,8 +24,10 @@ class Word{
         Word.all.push(this)
         //this.space = this.renderSpace()
 
-        console.log(JSON.stringify(wordObject,null,2))
-        console.log(Word.all)
+        currentWord = wordObject;
+
+        console.log('current word', JSON.stringify(wordObject,null,2))
+        // console.log(Word.all)
         // debugger
         this.renderSpace()
         this.letterClick()
@@ -30,7 +35,9 @@ class Word{
    
     renderSpace(){
         let wordContainer = document.querySelector("#word-container");
-        let word = Word.all[Word.all.length-1].name
+        // let word = Word.all[Word.all.length-1].name
+        //let word = Word.currentWord.name;
+        let word = currentWord.name
         let categoryContainer = document.querySelector("#category-container")
         
         categoryContainer.innerText = this.category.toUpperCase()
@@ -82,15 +89,21 @@ class Word{
     }        
     
     letterClick(){
-        let word;
-        if(word){
-            word = Word.all[Word.all.length-1].name
-        }else{
-            word = Word.all[Word.all.length-1].name
-        }
+        console.log("Letterclick: this" ,this)
+        // let word;
+        // if(word){
+        //     word = Word.all[Word.all.length-1].name
+        // }else{
+        //     word = Word.all[Word.all.length-1].name
+        // }
+
+        //let word = Word.currentWord.name;
+        let word = currentWord.name
        
         let letterButtons = document.querySelectorAll("#button");
+        // let letterButtons = document.querySelectorAll("#button")
         const len = word.split(" ").join("").length;
+        console.log("len:",len,"---correctanswer:", correctNumbers)
 
         letterButtons.forEach(button => {
             button.addEventListener("click", (e)=>{
@@ -108,7 +121,7 @@ class Word{
                     }
 
                     console.log(score)
-                    Player.displayScore(score,"200")
+                    Player.displayScore(Word.calculateScore(),"200")
                     if(indexArray.length == 0){
                         this.displayBody()      
                     }
@@ -163,48 +176,72 @@ class Word{
             modalBody.innerHTML = `The correct answer is <b>${this.name}<b>`
 
         }else{
-            modalBody.innerText = "Congratulations: "
+            modalBody.innerText = "Congratulations"
         }
         
         $("#gameEnd").modal("show");
         Game.sendGameData()
-        //this.reset()
+        this.reset()
+        //this.restart()
+        
+    }
+   
+
+    reset(){
+        //Word.all.shift()
+        correctNumbers = 0;
+        // Game.clearWordContainer()
+        this.clearWordContainer()
+        //Game.createWordContainer()
+        const newWord = new WordAPI("http://localhost:3000/words")
+        newWord.getWord()
+        //this.renderSpace()
+        bodyParts = [
+            "image/noose.png",
+            "image/face.png",
+            "image/shirt.png",
+            "image/arms.png",
+            "image/short.png",
+            "image/legs.png",
+        ]
+        cssBodyParts = ["noose","face","shirt","arms","short","legs"]
+       // this.letterClick()
+        this.enableAllButtons()
         
     }
 
-    // reset(){
-    //     Word.all.shift()
+    clearWordContainer(){
+        let wordContainer = document.querySelector("#word-container").children;
+        Array.from(wordContainer).forEach(letterContainer => {
+            letterContainer.innerText=""
+            letterContainer.remove()
+        })
+        // wordContainer.remove()
         
-    //     Game.clearWordContainer()
-    //     Game.createWordContainer()
-    //     this.name = new WordAPI("http://localhost:3000/words").getWord()
-    //     //this.renderSpace()
-    //     bodyParts = [
-    //         "image/noose.png",
-    //         "image/face.png",
-    //         "image/shirt.png",
-    //         "image/arms.png",
-    //         "image/short.png",
-    //         "image/legs.png",
-    //     ]
-    //     cssBodyParts = ["noose","face","shirt","arms","short","legs"]
-    //    // this.letterClick()
-    //     this.enableAllButtons()
+    }
+    
+    enableAllButtons() {
+        let letterButtons = document.querySelectorAll("#button");
+        letterButtons.forEach(button => {
+            button.disabled = false;
+        });
         
-    // }
-
-    // enableAllButtons() {
-    //     let letterButtons = document.querySelectorAll("#button");
-    //     letterButtons.forEach(button => {
-    //         button.disabled = false;
-    //     });
-        
-    // }
+    }
 
     static calculateScore(){
         console.log("calculateScore value", score)
         return score 
     }
+
+    // restart(){
+    //     //window reload
+    //     //grab current_players score
+    //     // location.reload();
+    //     //$("#welcome").modal("hide");
+    //     //return false;
+        
+    // }
+
 }
 
 
