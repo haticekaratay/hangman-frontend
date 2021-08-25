@@ -6,8 +6,8 @@ class WordAPI{
     }
 
      getWord() {
-        let len = 0
-        let rndIndex = 1;
+        // let len = 0
+        // let rndIndex = 1;
 
         fetch(`
         ${this.baseURL}/${Utils.getRandomIndex(20)}`)
@@ -16,12 +16,14 @@ class WordAPI{
             //len = words.length;
             //rndIndex = Utils.getRandomIndex(20);
             //new Word(words[rndIndex])//.renderSpace()
+           
             new Word(word)
+           
             //return words[rndIndex]
         });
     
     }
-    
+
 
 }
 

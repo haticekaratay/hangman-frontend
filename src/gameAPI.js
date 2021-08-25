@@ -14,9 +14,12 @@ class GameAPI{
         fetch(this.baseURL,configObject)
         .then(response => response.json())
         .then(currentGame=> {
+            //new Game(currentGame)
             console.log("current game",currentGame) 
-            new Game(currentGame)
-            //location.reload();           
+            //location.reload();  
+                $("#gameEnd").modal("hide")
+                Word.reset()  
+                
         })
         .catch(error=>console.log(error))
         

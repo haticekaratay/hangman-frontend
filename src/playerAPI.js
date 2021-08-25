@@ -3,6 +3,7 @@ class PlayerAPI{
 
     static createPlayer(playerData){
         console.log("player",playerData)
+        //let fetchedWord = Game.fetchWord()
         let configObject = {
             method: "POST",
             headers: {
@@ -15,20 +16,21 @@ class PlayerAPI{
 
         fetch(`${this.baseURL}/players`,configObject)
         .then(response => response.json())
-        .then(currentplayer => {
-            console.log("currentPlayer", currentplayer)
+        .then(currentPlayer => {
+            //let fetchedWord = Utils.word
             
-            if(currentplayer.message){
-                Game.errorMessage(currentplayer.message[0])
+            console.log("currentPlayer", currentPlayer)
+            //debugger
+            if(currentPlayer.message){
+                Game.errorMessage(currentPlayer.message[0])
             }else{
                 $("#welcome").modal("hide")
-                Player.displayName(currentplayer)
-                Player.displayScore(Word.calculateScore(),"100")
-                new Game({player_id: currentplayer.id})
-                //Game.sendGameData()
-                //new Game({player_id: currentplayer.id}).sendGameData()
-                // new Game({player_id: currentplayer.id})
-                
+                Player.displayName(currentPlayer)
+                Player.displayScore(Game.calculateScore(),"100")
+
+               
+               // new Game({player_id: currentPlayer.id, word: Utils.word.name, category: Utils.word.category})
+                new Game({player_id: currentPlayer.id}).startGame()
             }
             })
         .catch(error => console.log(error))
@@ -50,6 +52,8 @@ class PlayerAPI{
         })
         .catch(error => console.log(error))
     }
+
+    
 }
 
 
