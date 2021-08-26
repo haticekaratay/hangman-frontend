@@ -11,7 +11,7 @@ let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
 
 let score = 0
 let correctNumbers = 0;
-// let currentWord = {}
+
 class Word{
     static all = []
 
@@ -26,9 +26,6 @@ class Word{
         Word.currentWord = wordObject;
 
         console.log('current word', JSON.stringify(wordObject,null,2))
-        // console.log(Word.all)
-        // debugger
-
         this.renderSpace()
         this.letterClick()
     }
@@ -38,8 +35,7 @@ class Word{
 
         let wordContainer = document.querySelector("#word-container");
         wordContainer.innerHTML =""
-        // let word = Word.all[Word.all.length-1].name
-        //let word = Word.currentWord.name;
+   
         let word = Word.currentWord.name
         let categoryContainer = document.querySelector("#category-container")
         
@@ -58,11 +54,10 @@ class Word{
                     letterContainer.classList.add("letter-container","mr-3")
                     letterContainer.innerText =" "
                 }
-                //console.log(word)
-                wordContainer.appendChild(letterContainer)
+            wordContainer.appendChild(letterContainer)
         }
             
-        }
+    }
 
     findIndex(word,letter){
         console.log("word in find index", word)
@@ -97,13 +92,11 @@ class Word{
             button.innerText = letters[i]
             letterButtons.appendChild(button)
         }
-        //debugger
     }
     
     letterClick(){
         let letterButtons = document.querySelector("#buttons")
         for(let i=0; i<letterButtons.childElementCount; i++){
-            //console.log(letterButtons.children[i].innerText)
             letterButtons.children[i].addEventListener('click', (e) => {
                 this.checkLetter(e);
             })
@@ -111,9 +104,6 @@ class Word{
     } 
 
     checkLetter(event) {
-
-        //debugger
-        // check the word object.
         let word = Word.currentWord.name
                 console.log('WORD', JSON.stringify(word, null, 2))
 
@@ -143,7 +133,6 @@ class Word{
                     console.log("You lost");
                     this.disableAllButtons(); 
                     this.displayModal("Game Over", word)
-                    //this.gameoverSound()
 
                 } else if(correctNumbers == len){
                     console.log("You win")
@@ -152,11 +141,7 @@ class Word{
                     score += bodyParts.length * 10 
                     Player.displayScore(score,"100")
                     this.displayModal("You Win!", null)
-
                 }
-
-                // event.target.removeEventListener("click", Game.checkLetter);
-                // event.target.removeEventListener('click',Game.checkLetter.bind('', wordObj, event), false);
     }
 
 
@@ -206,6 +191,12 @@ class Word{
         this.clearHangmanContainer()
         let letterButtons = document.querySelector("#buttons")
         letterButtons.innerHTML=""
+        let modalButtons = document.querySelector("#modalButtons")
+        
+        for(let i=0; i<=modalButtons.childElementCount; i++){
+            modalButtons.removeChild(modalButtons.firstChild)
+        }
+    
         const newWord = new WordAPI("http://localhost:3000/words")
         newWord.getWord()
         bodyParts = [
