@@ -36,30 +36,31 @@ class Game{
         
         
     }
+    
     static errorMessage(message){
         let modalBodyText = document.querySelector("#error")
         modalBodyText.innerText = message
         modalBodyText.className = "error"
     }
 
-    // static displayExistingModal() {
-
-    //     $("#existingUserModal").modal("show");
-    // }
-
-
-
     static sendGameData() {
-        let playAgain = document.querySelector("#playAgain")
-        let close = document.querySelector("#close")
 
-        playAgain.addEventListener("click", (e)=>{
+        let modalButtons = document.querySelector("#modalButtons")
+        let playAgainButton = document.createElement("button")
+        let closeButton = document.createElement("button")
+        closeButton.classList.add("btn","btn-secondary")
+        closeButton.innerText = "Close"
+        playAgainButton.classList.add("btn","btn-primary")
+        playAgainButton.innerText="Play Again"
+        modalButtons.append(closeButton,playAgainButton)
+        
+
+        playAgainButton.addEventListener("click", (e)=>{
             let gameData = {
                 player_id: Game.all[Game.all.length-1].player_id,
                 score: Word.calculateScore(),
                 isFinished: false
             }
-            //console.log("before post gamedata", gameData)
             GameAPI.createGame(gameData)
             
             $("#gameEnd").modal("hide")
@@ -79,73 +80,5 @@ class Game{
     }
    
 
-   
-    // static clearWordContainer(){
-    //     let wordContainer = document.querySelector("#word-container").children;
-    //     Array.from(wordContainer).forEach(letterContainer => {
-    //         letterContainer.innerText=""
-    //         letterContainer.remove()
-    //     })
-    //     // wordContainer.remove()
-        
-    // }
-
-    // static createWordContainer(){
-        
-
-    //     let container = document.querySelector(".container").parentNode
-    //     let wordContainer = document.createElement("div")
-    //     wordContainer.className ="row"
-    //     wordContainer.id = "word-container"
-        
-    //     container.insertBefore(wordContainer,container.children[1])
-        
-    // }
-
-     // enableAllButtons() {
-    //     let letterButtons = document.querySelectorAll("#button");
-    //     letterButtons.forEach(button => {
-    //         button.disabled = false;
-    //     });
-        
-    // }
-
-    // static cleanLetterClickEvent() {
-    //     let letterButtons = document.querySelectorAll("#button");
-    //     letterButtons.forEach(button=>{
-            
-    //         button.removeEventListener("click", (e)=> {
-    //             console.log('removed')
-    //         })
-    //     }) 
-         
-    // }
-
-    static clearWordContainer(){
-        let wordContainer = document.querySelector("#word-container");
-        Array.from(wordContainer.children).forEach(letterContainer=>{
-            letterContainer.innerText =""
-            letterContainer.remove()
-        })
-        
-    }
-//     restart(){
-        
-//         //get another word
-//         //this.clearWordContainer();
-//         //this.cleanLetterClickEvent();
-//        // this.createWordContainer();
-//         //new WordAPI().postWord();
-//         new WordAPI().getWord()
-        
-//        //restart
-//         this.enableAllButtons();
-//         // clean the button click event
-        
-//         debugger
-        
-        
-//     }
-// }
 
 }
