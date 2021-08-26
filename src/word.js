@@ -34,6 +34,7 @@ class Word{
     }
    
     renderSpace(){
+        this.appendLetterBoard()
 
         let wordContainer = document.querySelector("#word-container");
         wordContainer.innerHTML =""
@@ -84,7 +85,20 @@ class Word{
         for(let i=0; i<indexArray.length; i++){
             a[indexArray[i]].innerText = letter
         }
-    }        
+    }     
+    
+    appendLetterBoard(){
+        let letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        let letterButtons = document.querySelector("#buttons")
+
+        for(let i= 0; i<letters.length; i++){
+            let button = document.createElement("button")
+            button.classList.add("btn","btn-success","mr-3", "btn-lg")
+            button.innerText = letters[i]
+            letterButtons.appendChild(button)
+        }
+        //debugger
+     }
     
     letterClick(){
         console.log("Letterclick: this" ,this)
