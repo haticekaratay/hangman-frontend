@@ -98,55 +98,67 @@ class Word{
             letterButtons.appendChild(button)
         }
         //debugger
-     }
+    }
     
     letterClick(){
-        console.log("Letterclick: this" ,this)
-    
+        let letterButtons = document.querySelector("#buttons")
+        for(let i=0; i<letterButtons.childElementCount; i++){
+            //console.log(letterButtons.children[i].innerText)
+            letterButtons.children[i].addEventListener('click', (e) => {
+                this.checkLetter(e);
+            })
+        }
+    } 
+
+    checkLetter(event) {
+
+        //debugger
+        // check the word object.
         let word = Word.currentWord.name
-       
-        let letterButtons = document.querySelectorAll("#button");
-        // let letterButtons = document.querySelectorAll("#button")
-        const len = word.split(" ").join("").length;
-        console.log("len:",len,"---correctanswer:", correctNumbers)
+                console.log('WORD', JSON.stringify(word, null, 2))
 
-        letterButtons.forEach(button => {
-            button.addEventListener("click", (e)=>{
-                    e.target.disabled = true
-                    Player.displayScore(Word.calculateScore(),"100")
-                    let value = e.target.value
-                    const indexArray = this.findIndex(word,value);
-                    
-                    console.log("in letter click - indexArray", indexArray)
-                    this.displayLetter(indexArray,value)
-                    correctNumbers = correctNumbers + indexArray.length
-                    
-                    if(indexArray.length>0){
-                        score = correctNumbers * 10
-                    }
+                
+                const len = word.split(" ").join("").length;
 
-                    console.log(score)
-                    Player.displayScore(Word.calculateScore(),"200")
-                    if(indexArray.length == 0){
-                        this.displayBody()      
-                    }
+                event.target.disabled = true
+                Player.displayScore(Word.calculateScore(),"200")
+                let value = event.target.innerText
+                  
+                const indexArray = this.findIndex(word,value);
 
-                    if(bodyParts.length==0){
-                        console.log("You lost");
-                        this.disableAllButtons(); 
-                        this.displayModal("Game Over",word)
+                this.displayLetter(indexArray,value)
+                
+                correctNumbers = correctNumbers + indexArray.length
+                if(indexArray.length > 0){
+                    score = correctNumbers * 10
+                }
+                Player.displayScore(Word.calculateScore(),"100")
+                if(indexArray.length == 0){
+                     
+                    this.displayBody()  
+                       
+                }
 
-                    } else if(correctNumbers == len){
-                       console.log("You win")
-                       this.disableAllButtons();
-                       score += bodyParts.length*10 
-                       console.log("before modal score", score)
-                       Player.displayScore(score,"100")
-                       this.displayModal("You Win!")
-                   }
-            })}); 
-            
+                if (bodyParts.length == 0){
+                    console.log("You lost");
+                    this.disableAllButtons(); 
+                    this.displayModal("Game Over", word)
+                    //this.gameoverSound()
+
+                } else if(correctNumbers == len){
+                    console.log("You win")
+                    this.disableAllButtons();
+        
+                    score += bodyParts.length * 10 
+                    Player.displayScore(score,"100")
+                    this.displayModal("You Win!", null)
+
+                }
+
+                // event.target.removeEventListener("click", Game.checkLetter);
+                // event.target.removeEventListener('click',Game.checkLetter.bind('', wordObj, event), false);
     }
+
 
     disableAllButtons() {
         let letterButtons = document.querySelectorAll("#button");
@@ -188,10 +200,12 @@ class Word{
    
 
     reset(){
-        Word.all.shift()
+        Word.currentWord ={}
         correctNumbers = 0;
         this.clearWordContainer()
         this.clearHangmanContainer()
+        let letterButtons = document.querySelector("#buttons")
+        letterButtons.innerHTML=""
         const newWord = new WordAPI("http://localhost:3000/words")
         newWord.getWord()
         bodyParts = [
