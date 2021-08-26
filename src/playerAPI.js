@@ -25,9 +25,6 @@ class PlayerAPI{
                 Player.displayName(currentplayer)
                 Player.displayScore(Word.calculateScore(),"100")
                 new Game({player_id: currentplayer.id})
-                //Game.sendGameData()
-                //new Game({player_id: currentplayer.id}).sendGameData()
-                // new Game({player_id: currentplayer.id})
                 
             }
             })
