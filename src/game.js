@@ -12,6 +12,11 @@ let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
 
 let score = 0
 let correctNumbers = 0;
+// let soundEffects={
+//     correct: new Howl({src:["assets/sound/correct.wav"]}),
+//     wrong: new Howl({src:["assets/sound/wrong.wav"]}),
+//     gameover:new Howl({src:["assets/sound/gameover.wav"]})
+// }
 
 class Game{
 
@@ -29,7 +34,7 @@ class Game{
         // Game.all.push(this) // 
         // this.renderSpace()
         // this.letterClick()
-
+        
       
     }
     startGame(){
@@ -37,6 +42,20 @@ class Game{
         // Game.fetchWord();
         Game.constructWordArray()
     }
+
+    static correctSound(){
+        let soundPlay = document.getElementById("correct")
+        soundPlay.play()
+    }
+    static wrongSound(){
+        let soundPlay = document.getElementById("wrong")
+        soundPlay.play()
+    }
+    static gameoverSound(){
+        let soundPlay = document.getElementById("gameover")
+        soundPlay.play()
+    }
+
 
     static constructWordArray() {
         fetch(baseURL)
@@ -83,6 +102,8 @@ class Game{
     }
 
     static renderSpace(wordObj){
+        this.appendLetterBoard()
+        //this.appendLetterBoard()
         let wordContainer = document.querySelector("#word-container");
         //wordContainer.innerHTML =""
       
@@ -111,18 +132,43 @@ class Game{
             
     }
 
-    static letterClick(wordObj){
-        let letterButtons = document.querySelectorAll("#button");
+    // static letterClick(wordObj){
+    //     let letterButtons = document.querySelectorAll("#button");
 
-        letterButtons.forEach(button => {
-            button.addEventListener('click',Game.checkLetter.bind('', wordObj, event), false);
-        }); 
-    }
+    //     letterButtons.forEach(button => {
+    //         // 
+    //         button.addEventListener('click', (e) => {
+    //             Game.checkLetter(wordObj, e);
+    //         });
+    //     }); 
+    // }
 
+    static appendLetterBoard(){
+        let letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        let letterButtons = document.querySelector("#buttons")
 
+        for(let i= 0; i<letters.length; i++){
+            let button = document.createElement("button")
+            button.classList.add("btn","btn-success","mr-3", "btn-lg")
+            button.innerText = letters[i]
+            letterButtons.appendChild(button)
+        }
+        //debugger
+     }
 
+     static letterClick(wordObj){
+        let letterButtons = document.querySelector("#buttons")
+        for(let i=0; i<letterButtons.childElementCount; i++){
+            //console.log(letterButtons.children[i].innerText)
+            letterButtons.children[i].addEventListener('click', (e) => {
+                Game.checkLetter(wordObj, e);
+            })
+        }
+    } 
+  
+     static checkLetter(wordObj, event) {
 
-    static checkLetter(wordObj, b, event) {
+        //debugger
         // check the word object.
                 console.log('WORD', JSON.stringify(wordObj, null, 2))
 
@@ -131,37 +177,40 @@ class Game{
 
                 event.target.disabled = true
                 Player.displayScore(Game.calculateScore(),"200")
-                let value = event.target.value
+                let value = event.target.innerText
                   
                 const indexArray = Game.findIndex(word,value);
 
                 Game.displayLetter(indexArray,value)
-                    
+                
                 correctNumbers = correctNumbers + indexArray.length
                 if(indexArray.length > 0){
                     score = correctNumbers * 10
                 }
         
                 if(indexArray.length == 0){
-                    Game.displayBody()      
+                     
+                    Game.displayBody()  
+                       
                 }
 
                 if (bodyParts.length == 0){
                     console.log("You lost");
                     Game.disableAllButtons(); 
                     Game.displayModal("Game Over", word, wordObj)
+                    this.gameoverSound()
 
                 } else if(correctNumbers == len){
                     console.log("You win")
                     Game.disableAllButtons();
                     // Game.removeEvents();
                     score += bodyParts.length * 10 
-                    Game.displayModal("You Win!", word, wordObj)
+                    Game.displayModal("You Win!", null, wordObj)
 
                 }
 
                 // event.target.removeEventListener("click", Game.checkLetter);
-                event.target.removeEventListener('click',Game.checkLetter.bind('', wordObj, event), false);
+                // event.target.removeEventListener('click',Game.checkLetter.bind('', wordObj, event), false);
     }
     
 
@@ -180,6 +229,7 @@ class Game{
     }
 
     static displayLetter(indexArray, letter){
+        
         let letterDiv= document.querySelectorAll("#word-container")[0].children
         console.log("in display letter",indexArray,letter)
         for(let i=0; i<indexArray.length; i++){
@@ -205,6 +255,7 @@ class Game{
     }
 
     static displayBody(){
+        this.wrongSound()
         let body = document.querySelector("#body-parts")
         let img = document.createElement("img")
         const image = bodyParts.shift()
@@ -254,6 +305,15 @@ class Game{
                 //isFinished: false
             }
             console.log("Game.sendGameData- gameDate:",JSON.stringify(gameData, null, 2))
+            
+            // remove the events from here
+            let letterButtons = document.querySelectorAll("#button");
+            letterButtons.forEach(button => {
+                button.removeEventListener('click', (e) => {
+                    Game.checkLetter(wordObj, e);
+                });
+            })
+
             Game.createGame(gameData, wordObj)
         })
     }
@@ -294,17 +354,18 @@ class Game{
 
 
 
-
-
-
-
     static reset(wordObj){
+        Game.clearHangmanContainer()
+        Game.clearWordContainer()
         wordObj = {};
         console.log('wordObject', JSON.stringify(wordObj, null, 2));
+        let letterButtons = document.querySelector("#buttons")
+        letterButtons.innerHTML=""
+        //this.appendLetterBoard()
 
         correctNumbers = 0;
-        Game.clearWordContainer()
-        Game.clearHangmanContainer()
+        
+        
         
         bodyParts = [
             "image/noose.png",
@@ -317,12 +378,14 @@ class Game{
         cssBodyParts = ["noose","face","shirt","arms","short","legs"]
         Game.enableAllButtons() 
 
-        delete wordObj.category
-        delete wordObj.id
-        delete wordObj.name
+        // delete wordObj.category
+        // delete wordObj.id
+        // delete wordObj.name
 
         console.log('wo after deletion', wordObj)
-        new Game(140).startGame();
+        
+        new Game({player_id: Player.currentPlayer.id}).startGame();
+        debugger
     }
 
     static clearWordContainer(){
@@ -379,6 +442,6 @@ class Game{
     //         letterContainer.remove()
     //     })
         
-    // }
+   //  }
 
 }

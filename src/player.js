@@ -1,5 +1,5 @@
 class Player{
-    //static currentPlayer = {}
+    static currentPlayer = {}
     
     constructor({name,id}){
         this.name = name

@@ -1,6 +1,7 @@
 //let baseURL = "http://localhost:3000/words"
 //const newWord = new WordAPI(baseURL)
 
+
 document.addEventListener("DOMContentLoaded", () => {
     // Utils.fetchWord()
     Player.displayWelcome();
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //newWord.getWord();
     
 })
+
 
 
 
