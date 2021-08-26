@@ -15,8 +15,7 @@ class GameAPI{
         .then(response => response.json())
         .then(currentGame=> {
             console.log("current game",currentGame) 
-            new Game(currentGame)
-            //location.reload();           
+            new Game(currentGame)         
         })
         .catch(error=>console.log(error))
         
