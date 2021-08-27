@@ -5,9 +5,10 @@ let bodyParts = [
     "image/arms.png",
     "image/short.png",
     "image/legs.png",
+    "image/hat.png"
 ]
 
-let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
+let cssBodyParts = ["noose","face","shirt","arms","short","legs","hat"]
 
 let score = 0
 let correctNumbers = 0;
@@ -40,7 +41,7 @@ class Word{
         let categoryContainer = document.querySelector("#category-container")
         
         categoryContainer.innerText = this.category.toUpperCase()
-        categoryContainer.className = "title"
+        categoryContainer.classList.add("title","col-md-4")
         
 
         for(let i=0; i<word.length; i++){
@@ -88,7 +89,7 @@ class Word{
 
         for(let i= 0; i<letters.length; i++){
             let button = document.createElement("button")
-            button.classList.add("btn","btn-success","mr-3", "btn-lg")
+            button.classList.add("btn","btn-danger","mr-3", "btn-lg")
             button.innerText = letters[i]
             letterButtons.appendChild(button)
         }
@@ -210,8 +211,9 @@ class Word{
             "image/arms.png",
             "image/short.png",
             "image/legs.png",
+            "image/hat.png"
         ]
-        cssBodyParts = ["noose","face","shirt","arms","short","legs"]
+        cssBodyParts = ["noose","face","shirt","arms","short","legs","hat"]
         this.enableAllButtons()
         
     }
