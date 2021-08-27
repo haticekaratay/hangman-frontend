@@ -78,6 +78,26 @@ class Game{
         // })
         
     }
+
+    static correctSound(){
+        let soundPlay = document.getElementById("correctAnswer")
+        soundPlay.play()
+    }
+
+    static wrongSound(){
+        let soundPlay = document.getElementById("wrongAnswer")
+        soundPlay.play()
+    }
+
+    static gameoverSound(){
+        let soundPlay = document.getElementById("gameover")
+        soundPlay.play()
+    }
+
+    static winningSound(){
+        let soundPlay = document.getElementById("win")
+        soundPlay.play()
+    }
    
 
 

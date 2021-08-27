@@ -120,6 +120,7 @@ class Word{
                 
                 correctNumbers = correctNumbers + indexArray.length
                 if(indexArray.length > 0){
+                    Game.correctSound()
                     score = correctNumbers * 10
                 }
                 Player.displayScore(Word.calculateScore(),"100")
@@ -133,11 +134,13 @@ class Word{
                     console.log("You lost");
                     this.disableAllButtons(); 
                     this.displayModal("Game Over", word)
+                    Game.gameoverSound()
 
                 } else if(correctNumbers == len){
                     console.log("You win")
                     this.disableAllButtons();
-        
+                    Game.winningSound()
+                    
                     score += bodyParts.length * 10 
                     Player.displayScore(score,"100")
                     this.displayModal("You Win!", null)
@@ -154,6 +157,7 @@ class Word{
 
 
     displayBody(){
+        
         let body = document.querySelector("#body-parts")
         let img = document.createElement("img")
         const image = bodyParts.shift()
@@ -163,7 +167,7 @@ class Word{
         img.className = css
         img.src = image
         body.append(img)
-        
+        Game.wrongSound()
     }
 
     displayModal(status,answer){
