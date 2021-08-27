@@ -1,5 +1,16 @@
-body{
-    background: rgb(255, 196, 196);
+
+#score-container,#username-container{
+    font-size: 200%;
+    font-weight: bold;
+    font-family: 'Luckiest Guy', cursive;
+    text-align: right;
+}
+
+#username-container{
+    font-size: 200%;
+    font-weight: bold;
+    font-family: 'Luckiest Guy', cursive;
+    text-align: left;
 }
 
 .container {
@@ -39,7 +50,7 @@ body{
 .short{
     width: 48%;
     position: absolute ;
-    top: 45%;
+    top: 47%;
     right: 19%;
     z-index: 5;
 }
@@ -51,38 +62,53 @@ body{
     right: 21%;
     z-index: 4;
 }
+.hat{
+    width: 36%;
+    position: absolute ;
+    top: 15%;
+    right: 25%;
+    z-index: 4;
+}
+
 .btn {
     width:20%;
     margin-bottom: 2%;
+    font-family: 'Luckiest Guy', cursive;
 }
 
 .letter-container{
-    height: 20%;
-    width: 3%;
-    border-bottom: 5px solid rgb(8, 6, 0); 
-    /* font-size: xx-large; */
-    /* font-size: 2vw; */
-    /* font-size: calc(4vw + 4vh); */
-    font-weight: bold;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    /* align-content: center; */
-    text-align: center;
     
-    /* white-space: nowrap; */
+    width: 3%;
+    border-bottom: 3px solid rgb(8, 6, 0); 
+   
+    font-size: 200%;
+    font-weight: bold;
+    font-family:'Luckiest Guy', cursive;
+    text-align: center;
+    vertical-align: bottom;
+    margin-bottom: 0px;
     
 }
 .empty-space{
-    height: 20%;
-    width: 2%;
+    width: 7%;
 }
 
 .title{
-    font-size: xx-large;
-    font-weight: bold;
-    font-family: cursive;
     text-align: center;
+    font-size: 200%;
+    font-weight: bold;
+    font-family: 'Rampart One', cursive; 
 }
 .error{
     font-weight: bold;
     color: red;
 }
+.modal-content{
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Rampart One', cursive; */
+/* 'Raleway', sans-serif; */
+/* 'Roboto', sans-serif; */
+/* font-family: 'Luckiest Guy', cursive; */

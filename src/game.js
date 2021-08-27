@@ -50,7 +50,7 @@ class Game{
         let closeButton = document.createElement("button")
         closeButton.classList.add("btn","btn-secondary")
         closeButton.innerText = "Close"
-        playAgainButton.classList.add("btn","btn-primary")
+        playAgainButton.classList.add("btn","btn-dark")
         playAgainButton.innerText="Play Again"
         modalButtons.append(closeButton,playAgainButton)
         
