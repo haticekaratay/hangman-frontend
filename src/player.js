@@ -14,7 +14,6 @@ class Player{
     static displayScore(currentScore){
         let score = document.querySelector("#score")
         score.innerText = "Score: " + currentScore
-        //console.log(currentScore)
     }
 
     static displayBestScore(playerObj){
@@ -22,9 +21,7 @@ class Player{
         let best = document.querySelector("#best")
         let bestScore = playerObj.games[0].score
         let bestPlayer = playerObj.name
-        //debugger
-        //best.innerText = "BEST: " + bestScore 
         best.innerText=`BEST: ${bestScore} by ${bestPlayer}`
     }
-    
+ 
 }

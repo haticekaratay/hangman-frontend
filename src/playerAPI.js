@@ -22,7 +22,7 @@ class PlayerAPI{
                 Game.errorMessage(currentplayer.message[0])
             }else{
                 $("#welcome").modal("hide")
-                PlayerAPI.bestScore()
+                PlayerAPI.getBestScore()
                 Player.displayName(currentplayer)
                 Player.displayScore(Word.calculateScore())
                 new Game({player_id: currentplayer.id})
@@ -49,6 +49,7 @@ class PlayerAPI{
         .then(player =>{
             console.log(player)
             Player.displayBestScore(player)
+            return player.games[0].score
         })
     }
 }

@@ -1,6 +1,6 @@
 
-#score-container,#username-container{
-    font-size: 200%;
+#score-container{
+    font-size: 100%;
     font-weight: bold;
     font-family: 'Luckiest Guy', cursive;
     text-align: right;
@@ -47,21 +47,22 @@
     z-index: 1; 
 }
 
-.short{
+.short{ 
     width: 48%;
     position: absolute ;
-    top: 47%;
-    right: 19%;
+    top: 51%;
+    right: 18%;
     z-index: 5;
 }
 
 .legs{
     width: 40%;
     position: absolute ;
-    top: 60%;
+    top: 62%;
     right: 21%;
     z-index: 4;
-}
+}  
+
 .hat{
     width: 36%;
     position: absolute ;

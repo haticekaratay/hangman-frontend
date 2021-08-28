@@ -20,5 +20,6 @@ class GameAPI{
         .catch(error=>console.log(error))
         
     }
+
 }
 

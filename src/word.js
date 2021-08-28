@@ -127,9 +127,7 @@ class Word{
                 Player.displayScore(Word.calculateScore())
                 //Player.displayBestScore(Player.bestPlayer)
                 if(indexArray.length == 0){
-                     
-                    this.displayBody()  
-                       
+                    this.displayBody()    
                 }
 
                 if (bodyParts.length == 0){
@@ -142,6 +140,10 @@ class Word{
                     console.log("You win")
                     this.disableAllButtons();
                     Game.winningSound()
+                    // if(PlayerAPI.getBestScore() > calculateScore()){
+                    //     Player.displayBestScore()
+                    //     Game.winningSound()
+                    // }
                     
                     score += bodyParts.length * 10 
                     Player.displayScore(Word.calculateScore())
@@ -179,9 +181,9 @@ class Word{
         
         if(answer){
             modalBody.innerHTML = `The correct answer is <b>${this.name}<b>`
-
         }else{
-            modalBody.innerText = "Congratulations"
+            modalBody.innerText = `Congratulations!! Your score is: ${Word.calculateScore()}`
+            score = Word.calculateScore()
         }
         $('#modalForm').modal({ backdrop: 'static', keyboard: false })
         $("#gameEnd").modal("show");
@@ -198,11 +200,11 @@ class Word{
         let letterButtons = document.querySelector("#buttons")
         letterButtons.innerHTML=""
         let modalButtons = document.querySelector("#modalButtons")
-        
-        for(let i=0; i<=modalButtons.childElementCount; i++){
+        // reset all buttons in modal
+        for(let i=0; i<modalButtons.childElementCount-1; i++){
             modalButtons.removeChild(modalButtons.firstChild)
         }
-    
+        
         const newWord = new WordAPI("http://localhost:3000/words")
         newWord.getWord()
         bodyParts = [
