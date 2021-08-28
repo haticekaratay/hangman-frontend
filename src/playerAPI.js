@@ -39,12 +39,6 @@ class PlayerAPI{
         .then(response => response.json()) 
         .then(player => {
             console.log('user created')
-            //Game.displayModals();
-            //len = words.length;
-            //rndIndex = Utils.getRandomIndex(20);
-            //new Word(words[rndIndex])//.renderSpace()
-            //new Game({player_id: player.id})
-            //return player
         })
         .catch(error => console.log(error))
     }
@@ -54,8 +48,6 @@ class PlayerAPI{
         .then(response => response.json())
         .then(player =>{
             console.log(player)
-            //console.log("best-score belongs to",JSON.stringify(player,null,2))
-            //Player.bestPlayer = player
             Player.displayBestScore(player)
         })
     }

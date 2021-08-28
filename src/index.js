@@ -4,6 +4,8 @@ const newWord = new WordAPI(baseURL)
 document.addEventListener("DOMContentLoaded", () => {
     Game.displayWelcome();
     newWord.getWord();
+    PlayerAPI.getBestScore()
+   // Player.displayBestScore();
 })
 
 

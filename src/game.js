@@ -23,7 +23,7 @@ class Game{
         input.type = "text"
         input.placeholder ="Your Name"
         modalBody.append(input)
-     
+        $('#modalForm').modal({ backdrop: 'static', keyboard: false })
         $("#welcome").modal("show");
 
         savePlayerButton.addEventListener("click",(e)=>{
@@ -31,7 +31,6 @@ class Game{
            if(input.value.length>0){
                PlayerAPI.createPlayer({name: input.value});
             }
-         
         })
         
         

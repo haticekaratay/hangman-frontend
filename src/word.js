@@ -112,7 +112,7 @@ class Word{
                 const len = word.split(" ").join("").length;
 
                 event.target.disabled = true
-                Player.displayScore(Word.calculateScore(),"200")
+                Player.displayScore(Word.calculateScore())
                 let value = event.target.innerText
                   
                 const indexArray = this.findIndex(word,value);
@@ -124,7 +124,8 @@ class Word{
                     Game.correctSound()
                     score = correctNumbers * 10
                 }
-                Player.displayScore(Word.calculateScore(),"100")
+                Player.displayScore(Word.calculateScore())
+                //Player.displayBestScore(Player.bestPlayer)
                 if(indexArray.length == 0){
                      
                     this.displayBody()  
@@ -143,7 +144,7 @@ class Word{
                     Game.winningSound()
                     
                     score += bodyParts.length * 10 
-                    Player.displayScore(score,"100")
+                    Player.displayScore(Word.calculateScore())
                     this.displayModal("You Win!", null)
                 }
     }
@@ -182,7 +183,7 @@ class Word{
         }else{
             modalBody.innerText = "Congratulations"
         }
-        
+        $('#modalForm').modal({ backdrop: 'static', keyboard: false })
         $("#gameEnd").modal("show");
         Game.sendGameData()
         this.reset()
