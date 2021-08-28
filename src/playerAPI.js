@@ -1,6 +1,6 @@
 class PlayerAPI{
     static baseURL = "http://localhost:3000"
-
+    
     static createPlayer(playerData){
         console.log("player",playerData)
         let configObject = {
@@ -22,8 +22,9 @@ class PlayerAPI{
                 Game.errorMessage(currentplayer.message[0])
             }else{
                 $("#welcome").modal("hide")
+                PlayerAPI.bestScore()
                 Player.displayName(currentplayer)
-                Player.displayScore(Word.calculateScore(),"100")
+                Player.displayScore(Word.calculateScore())
                 new Game({player_id: currentplayer.id})
                 
             }
@@ -47,7 +48,19 @@ class PlayerAPI{
         })
         .catch(error => console.log(error))
     }
+
+    static getBestScore(){
+        fetch(`${this.baseURL}/best_score`)
+        .then(response => response.json())
+        .then(player =>{
+            console.log(player)
+            //console.log("best-score belongs to",JSON.stringify(player,null,2))
+            //Player.bestPlayer = player
+            Player.displayBestScore(player)
+        })
+    }
 }
+
 
 
 
