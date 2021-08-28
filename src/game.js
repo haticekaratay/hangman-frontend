@@ -1,20 +1,28 @@
 class Game{
     static all =[]
-    //static players = [];
     constructor({id,player_id}){
         this.id = id
         this.player_id = player_id
         Game.all.push(this)
-        //Game.players.push(player_id)
         
     }
   
     static displayWelcome(){
+        let modalFooter = document.querySelector("#footer")
+        if(modalFooter.children.length>0){
+            for(let i=0; i<modalFooter.childElementCount; i++){
+                modalFooter.children[i].remove()
+            }
+        }
+        
 
         let modalTitle = document.querySelector("#modalTitle")
         let modalBody = document.querySelector("#modalBodyText")
-        let savePlayerButton = document.querySelector("#savePlayer")
-        //let closeButton = document.querySelector("#close")
+        let savePlayerButton = document.createElement("button")
+        savePlayerButton.classList.add("btn","btn-dark")
+        savePlayerButton.innerText = "Save"
+        modalFooter.append(savePlayerButton)
+
         modalTitle.innerText = "Welcome to our Game of Hangman, Choose your letters wisely, you have 6 lives for each word. If you guess a word correctly, you will regain your lives and guess the next word"
         let input = document.createElement("input")
     
@@ -32,8 +40,7 @@ class Game{
                PlayerAPI.createPlayer({name: input.value});
             }
         })
-        
-        
+     
     }
     
     static errorMessage(message){
@@ -43,15 +50,16 @@ class Game{
     }
 
     static sendGameData() {
+       
 
         let modalButtons = document.querySelector("#modalButtons")
         let playAgainButton = document.createElement("button")
-        let closeButton = document.createElement("button")
-        closeButton.classList.add("btn","btn-secondary")
-        closeButton.innerText = "Close"
+        let quitButton = document.createElement("button")
+        quitButton.classList.add("btn","btn-secondary")
+        quitButton.innerText = "Quit"
         playAgainButton.classList.add("btn","btn-dark")
         playAgainButton.innerText="Play Again"
-        modalButtons.append(closeButton,playAgainButton)
+        modalButtons.append(quitButton,playAgainButton)
         
 
         playAgainButton.addEventListener("click", (e)=>{
@@ -65,16 +73,24 @@ class Game{
             $("#gameEnd").modal("hide")
         })
 
-        // close.addEventListener("click",(e)=>{
-        //     let gameData = {
-        //         player_id: Game.all[Game.all.length-1].player_id,
-        //         score: Word.calculateScore()
+        quitButton.addEventListener("click",(e)=>{
+            let gameData = {
+                player_id: Game.all[Game.all.length-1].player_id,
+                score: Word.calculateScore()
+            }
+            GameAPI.createGame(gameData)
+            // if user quits
+            //hide the modal
+            $("#gameEnd").modal("hide")
+            //clear user name container
+            let score = document.querySelector("#username-container")
+            score.innerHTML =``
+           
+            //display welcome modal again
+            this.displayWelcome()
 
-        //     }
-        //     GameAPI.createGame(gameData)
-            
-        //     $("#gameEnd").modal("hide")
-        // })
+
+        })
         
     }
 
