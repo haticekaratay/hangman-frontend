@@ -11,13 +11,20 @@ class Player{
         
     }
 
-    static displayScore(currentScore,bestScore){
+    static displayScore(currentScore){
         let score = document.querySelector("#score")
-        let best = document.querySelector("#best")
         score.innerText = "Score: " + currentScore
-        best.innerText = "Highest: " + bestScore
-        console.log(currentScore)
-       
+        //console.log(currentScore)
+    }
+
+    static displayBestScore(playerObj){
+        //playerObj = {id: 1, name: "Haley", games: Array(1)}
+        let best = document.querySelector("#best")
+        let bestScore = playerObj.games[0].score
+        let bestPlayer = playerObj.name
+        //debugger
+        //best.innerText = "BEST: " + bestScore 
+        best.innerText=`BEST: ${bestScore} by ${bestPlayer}`
     }
     
 }
