@@ -1,7 +1,7 @@
 # HangMan
  Welcome to Hangman a Single Page Application, with a [Rails API](https://github.com/haticekaratay/hangman-backend), emulates one the popular games of all time. 
 
- ![Alt Text](app/image/hangman.gif?raw=true)
+ ![Alt Text](assets/images/hangman.gif?raw=true)
 
  ## Usage
  - Navigate to [Rails Backend](https://github.com/haticekaratay/hangman-backend) and install it. Then start your server from your backend:

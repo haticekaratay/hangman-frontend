@@ -1,11 +1,11 @@
 let bodyParts = [
-    "image/noose.png",
-    "image/face.png",
-    "image/shirt.png",
-    "image/arms.png",
-    "image/short.png",
-    "image/legs.png",
-    "image/hat.png"
+    "assets/images/noose.png",
+    "assets/images/face.png",
+    "assets/images/shirt.png",
+    "assets/images/arms.png",
+    "assets/images/short.png",
+    "assets/images/legs.png",
+    "assets/images/hat.png"
 ]
 
 let cssBodyParts = ["noose","face","shirt","arms","short","legs","hat"]
@@ -27,6 +27,7 @@ class Word{
         Word.currentWord = wordObject;
 
         console.log('current word', JSON.stringify(wordObject,null,2))
+        
         this.renderSpace()
         this.letterClick()
     }
@@ -197,6 +198,7 @@ class Word{
         correctNumbers = 0;
         this.clearWordContainer()
         this.clearHangmanContainer()
+       
         let letterButtons = document.querySelector("#buttons")
         letterButtons.innerHTML=""
         let modalButtons = document.querySelector("#modalButtons")
@@ -208,13 +210,13 @@ class Word{
         const newWord = new WordAPI("http://localhost:3000/words")
         newWord.getWord()
         bodyParts = [
-            "image/noose.png",
-            "image/face.png",
-            "image/shirt.png",
-            "image/arms.png",
-            "image/short.png",
-            "image/legs.png",
-            "image/hat.png"
+            "assets/images/noose.png",
+            "assets/images/face.png",
+            "assets/images/shirt.png",
+            "assets/images/arms.png",
+            "assets/images/short.png",
+            "assets/images/legs.png",
+            "assets/images/hat.png"
         ]
         cssBodyParts = ["noose","face","shirt","arms","short","legs","hat"]
         this.enableAllButtons()
