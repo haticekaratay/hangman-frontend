@@ -15,7 +15,6 @@ class Game{
             }
         }
         
-
         let modalTitle = document.querySelector("#modalTitle")
         let modalBody = document.querySelector("#modalBodyText")
         let savePlayerButton = document.createElement("button")

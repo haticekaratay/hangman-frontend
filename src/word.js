@@ -24,10 +24,7 @@ class Word{
         this.category = wordObject.category
         Word.all.push(this)
 
-        Word.currentWord = wordObject;
-
-        console.log('current word', JSON.stringify(wordObject,null,2))
-        
+        Word.currentWord = wordObject;        
         this.renderSpace()
         this.letterClick()
     }
@@ -41,7 +38,7 @@ class Word{
         let word = Word.currentWord.name
         let categoryContainer = document.querySelector("#category-container")
         
-        categoryContainer.innerText = this.category.toUpperCase()
+        categoryContainer.innerText = this.category.toUpperCase() 
         categoryContainer.classList.add("title","col-md-4")
         
 
@@ -62,7 +59,6 @@ class Word{
     }
 
     findIndex(word,letter){
-        console.log("word in find index", word)
         let repeatingLetterIndex =[]
         
         word.toLowerCase().split("").filter((l,index)=>{
@@ -78,7 +74,6 @@ class Word{
     displayLetter(indexArray,letter){
        
         let a= document.querySelectorAll("#word-container")[0].children
-        console.log("in display letter",indexArray,letter)
         for(let i=0; i<indexArray.length; i++){
             a[indexArray[i]].innerText = letter
         }
@@ -107,49 +102,40 @@ class Word{
 
     checkLetter(event) {
         let word = Word.currentWord.name
-                console.log('WORD', JSON.stringify(word, null, 2))
 
+            const len = word.split(" ").join("").length;
+
+            event.target.disabled = true
+            Player.displayScore(Word.calculateScore())
+            let value = event.target.innerText
                 
-                const len = word.split(" ").join("").length;
+            const indexArray = this.findIndex(word,value);
 
-                event.target.disabled = true
+            this.displayLetter(indexArray,value)
+            
+            correctNumbers = correctNumbers + indexArray.length
+            if(indexArray.length > 0){
+                Game.correctSound()
+                score = correctNumbers * 10
+            }
+            Player.displayScore(Word.calculateScore())
+            if(indexArray.length == 0){
+                this.displayBody()    
+            }
+
+            if(bodyParts.length == 0){
+                this.disableAllButtons(); 
+                this.displayModal("Game Over", word)
+                Game.gameoverSound()
+
+            }else if(correctNumbers == len){
+                this.disableAllButtons();
+                Game.winningSound()
+  
+                score += bodyParts.length * 10 
                 Player.displayScore(Word.calculateScore())
-                let value = event.target.innerText
-                  
-                const indexArray = this.findIndex(word,value);
-
-                this.displayLetter(indexArray,value)
-                
-                correctNumbers = correctNumbers + indexArray.length
-                if(indexArray.length > 0){
-                    Game.correctSound()
-                    score = correctNumbers * 10
-                }
-                Player.displayScore(Word.calculateScore())
-                //Player.displayBestScore(Player.bestPlayer)
-                if(indexArray.length == 0){
-                    this.displayBody()    
-                }
-
-                if (bodyParts.length == 0){
-                    console.log("You lost");
-                    this.disableAllButtons(); 
-                    this.displayModal("Game Over", word)
-                    Game.gameoverSound()
-
-                } else if(correctNumbers == len){
-                    console.log("You win")
-                    this.disableAllButtons();
-                    Game.winningSound()
-                    // if(PlayerAPI.getBestScore() > calculateScore()){
-                    //     Player.displayBestScore()
-                    //     Game.winningSound()
-                    // }
-                    
-                    score += bodyParts.length * 10 
-                    Player.displayScore(Word.calculateScore())
-                    this.displayModal("You Win!", null)
-                }
+                this.displayModal("You Win!", null)
+            }
     }
 
 
@@ -244,7 +230,6 @@ class Word{
     }
 
     static calculateScore(){
-        console.log("calculateScore value", score)
         return score 
     }
 }

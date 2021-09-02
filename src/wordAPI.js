@@ -13,10 +13,8 @@ class WordAPI{
             let rndIndex = Utils.getRandomIndex(len-1);
             new Word(words[rndIndex])
         });
-    
     }
     
-
 }
 
 

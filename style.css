@@ -47,7 +47,7 @@
     z-index: 1; 
 }
 
-.short{ 
+.short{    
     width: 48%;
     position: absolute ;
     top: 51%;
@@ -58,18 +58,11 @@
 .legs{
     width: 40%;
     position: absolute ;
-    top: 62%;
+    top: 64%;
     right: 21%;
     z-index: 4;
-}  
-
-.hat{
-    width: 36%;
-    position: absolute ;
-    top: 15%;
-    right: 25%;
-    z-index: 4;
 }
+
 
 .btn {
     width:20%;
@@ -108,8 +101,3 @@
     font-weight: bold;
     font-family: 'Raleway', sans-serif;
 }
-
-/* Rampart One', cursive; */
-/* 'Raleway', sans-serif; */
-/* 'Roboto', sans-serif; */
-/* font-family: 'Luckiest Guy', cursive; */

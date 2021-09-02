@@ -14,7 +14,6 @@ class GameAPI{
         fetch(this.baseURL,configObject)
         .then(response => response.json())
         .then(currentGame=> {
-            console.log("current game",currentGame) 
             new Game(currentGame)         
         })
         .catch(error=>console.log(error))
