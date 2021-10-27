@@ -1,4 +1,4 @@
-let baseURL = "http://localhost:3000/words"
+let baseURL = "https://hangman-word-guess.herokuapp.com/words"
 const newWord = new WordAPI(baseURL)
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,5 +1,5 @@
 class PlayerAPI{
-    static baseURL = "http://localhost:3000"
+    static baseURL = "https://hangman-word-guess.herokuapp.com"
     
     static createPlayer(playerData){
         let configObject = {

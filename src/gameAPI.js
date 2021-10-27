@@ -1,5 +1,5 @@
 class GameAPI{
-    static baseURL = "http://localhost:3000/games"
+    static baseURL = "https://hangman-word-guess.herokuapp.com/games"
 
     static createGame(gameData){
         let configObject = {

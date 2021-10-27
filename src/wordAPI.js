@@ -1,5 +1,5 @@
 class WordAPI{
-    static baseURL = "http://localhost:3000/words"
+    static baseURL = "https://hangman-word-guess.herokuapp.com/words"
 
     constructor (baseURL) {
         this.baseURL = baseURL

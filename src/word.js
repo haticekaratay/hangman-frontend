@@ -193,7 +193,7 @@ class Word{
             modalButtons.removeChild(modalButtons.firstChild)
         }
         
-        const newWord = new WordAPI("http://localhost:3000/words")
+        const newWord = new WordAPI("https://hangman-word-guess.herokuapp.com/words")
         newWord.getWord()
         bodyParts = [
             "assets/images/noose.png",
