@@ -5,10 +5,10 @@ let bodyParts = [
     "assets/images/arms.png",
     "assets/images/short.png",
     "assets/images/legs.png",
-    "assets/images/hat.png"
+    "assets/images/legs.png"
 ]
 
-let cssBodyParts = ["noose","face","shirt","arms","short","legs","hat"]
+let cssBodyParts = ["noose","face","shirt","arms","short","legs"]
 
 let score = 0
 let correctNumbers = 0;
@@ -119,7 +119,7 @@ class Word{
                 score = correctNumbers * 10
             }
             Player.displayScore(Word.calculateScore())
-            if(indexArray.length == 0){
+            if(indexArray.length === 0){
                 this.displayBody()    
             }
 
@@ -153,7 +153,6 @@ class Word{
         let img = document.createElement("img")
         const image = bodyParts.shift()
         let css = cssBodyParts.shift()
-
         
         img.className = css
         img.src = image
@@ -202,9 +201,9 @@ class Word{
             "assets/images/arms.png",
             "assets/images/short.png",
             "assets/images/legs.png",
-            "assets/images/hat.png"
+            "assets/images/legs.png"
         ]
-        cssBodyParts = ["noose","face","shirt","arms","short","legs","hat"]
+        cssBodyParts = ["noose","face","shirt","arms","short","legs"]
         this.enableAllButtons()
         
     }

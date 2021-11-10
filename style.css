@@ -16,18 +16,19 @@
 .container {
     margin-top: 50px;
 }
+
 .noose{
     width: 55%;
     top: 4%;
     left: 5%;
-    position: absolute;
+    position: relative;
     z-index: 1;
 }
-  
+
 .face{
     width: 36%;
     position: absolute ;
-    top: 15%;
+    top: 10%;
     right: 25%;
     z-index: 3;
 }
@@ -35,14 +36,15 @@
 .shirt{
     position: absolute ;
     width: 50%;
-    top: 26.8%;
+    top: 23%;
     right: 16.7%;
     z-index: 2; 
 }
+
 .arms{
     position: absolute ;
     width: 50%;
-    top: 26.5%;
+    top: 23%;
     right: 18.2%;
     z-index: 1; 
 }
@@ -50,17 +52,18 @@
 .short{    
     width: 48%;
     position: absolute ;
-    top: 51%;
+    top: 45%;
     right: 18%;
-    z-index: 5;
+    z-index: 3;
 }
+
 
 .legs{
     width: 40%;
     position: absolute ;
     top: 64%;
     right: 21%;
-    z-index: 4;
+    z-index: 1;
 }
 
 
